@@ -1,0 +1,52 @@
+# master 
+private_token: xxx 
+
+gitlab_url: http://xxx/api/v4
+
+config:
+  - name: prod
+   
+    project_name: xxx1
+    project_name: xxx2
+    
+    pipeline:
+      hotfix-9.27.2:
+          - product
+          # - hotfix-9.27.1:
+          - master:
+            - branch_9.28:
+              - develop
+            
+          
+  - name: pre
+    project_name: xxx1
+    project_name: xxx2
+    pipeline:
+      hotfix-9.19.1:
+        - master
+        - branch_9.20:
+            - develop
+        
+  - name: shikamaru-server
+    project_name: shikamaru-server
+    pipeline:
+      hotfix-6.7.1: 
+        - hotfix-6.8.1:
+            - branch_6.9:
+              - develop
+        - master
+  - name: huidu
+    project_name: xxx1
+    project_name: xxx2
+
+    # pipeline:
+    #   branch_9.16:
+    #     - master:
+    #       - hotfix-9.16.1
+    #       - branch_9.17
+    pipeline:
+        master:
+          - hotfix-9.16.1
+          - branch_9.17
+
+  

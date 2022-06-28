@@ -1,0 +1,10 @@
+**/*.pyc
+**/*.log
+**/*.logs
+**/.DS_Store
+.idea/
+.vscode/
+logs/
+**/metastore_db/
+**/_trial_temp/
+

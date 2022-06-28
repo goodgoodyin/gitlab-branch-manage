@@ -1,0 +1,87 @@
+# master 
+private_token:  xxx  
+
+gitlab_url: http://xxx/api/v4
+
+config:
+
+  # 生产上线
+  - name: shangxian
+    action: merge
+    title: xx灰度上线
+    pipeline:
+      branch_9.29:
+        - master
+
+    
+  - name: prod
+    action: merge
+    title: xx生产上线
+    pipeline:
+      master:
+        # - master
+        - product
+          # - hotfix-9.26.2
+
+
+  - name: tmp
+    action: merge
+    pipeline:
+      branch_9.17:
+        - branch_9.18
+
+ #  其实也是调用的设置保护
+  - name: unprotect
+    action: unprotect
+    branches:
+      - branch_9.18
+    pipeline:
+      branch_9.17:
+        - branch_9.18
+
+ # default的分支设置为默认分支
+ # branches的分支为保护分支 
+ # 不会合代码，所以没必要写  pipeline
+  - name: protect
+    action: protect
+    default: branch_9.19
+    branches:
+      - product
+      - develop
+      - master
+      - hotfix-9.17.1
+      - hotfix-9.18.1
+      - branch_9.19
+    pipeline:
+      branch_9.17:
+        - branch_9.18
+
+  # 拉分支
+  - name: dev
+    action: create
+    pipeline:
+      master:
+        # - product
+        # - develop
+        # - branch_9.20
+        - hotfix-9.29.1
+        # - hotfix-9.18.1
+
+   # 拉开发分支并设置默认分支
+  - name: pulldev
+    action: createAndDefault
+    pipeline:
+      master:
+        - branch_9.30
+    default: branch_9.30
+
+  #  设置默认分支 
+  - name: dev2
+    action: default
+    default: branch_9.20
+    
+
+project:
+    - xxx
+    - 
+
